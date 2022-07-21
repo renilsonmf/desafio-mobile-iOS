@@ -17,7 +17,7 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let controller = ViewController()
+        let controller = MarvelViewController()
         navigationController.pushViewController(controller, animated: true)
     }
 }

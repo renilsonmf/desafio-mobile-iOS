@@ -7,14 +7,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MarvelViewController: UIViewController {
 
+    let contextView = MarvelView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        // Do any additional setup after loading the view.
     }
 
+    override func loadView() {
+        super.loadView()
+        view = contextView
+    }
 
 }
 
