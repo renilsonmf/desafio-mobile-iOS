@@ -10,6 +10,7 @@ target 'Marvel' do
   target 'MarvelTests' do
     inherit! :search_paths
     pod 'lottie-ios'
+    pod 'AlamofireImage', '~> 4.1'
   end
 
   target 'MarvelUITests' do
