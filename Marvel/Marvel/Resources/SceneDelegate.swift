@@ -15,8 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let navigationController = UINavigationController()
-        let controller = ViewController()
-        navigationController.pushViewController(controller, animated: true)
+        let coordinator = MainCoordinator(navigationController: navigationController)
+        coordinator.start()
         
         guard let wScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: wScene)
