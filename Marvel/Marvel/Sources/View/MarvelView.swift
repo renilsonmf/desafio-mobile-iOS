@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class MarvelView: UIView {
+        
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupView()
@@ -23,11 +24,18 @@ class MarvelView: UIView {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .green
         collection.isPagingEnabled = true
-        collection.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
+        collection.register(CustomCellCollectionView.self, forCellWithReuseIdentifier: "CustomCellCollectionView")
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
+    }()
+    
+    lazy var tableView: UITableView = {
+        let table = UITableView()
+        table.register(CustomCellTableView.self, forCellReuseIdentifier: "CustomCellTableView")
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.tableFooterView = UIView()
+       return table
     }()
     
 }
@@ -35,15 +43,21 @@ class MarvelView: UIView {
 extension MarvelView: ViewCoding {
     func buildViewHierarchy() {
         addSubview(collectionView)
+        addSubview(tableView)
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 30),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            collectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
-        ])        
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+            
+            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
     
     func additionalSettings() {
