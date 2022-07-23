@@ -7,7 +7,9 @@
 
 
 struct MarvelModel {
+    let name: String
     let image: UIImage
+    let description: String
 }
 
 import UIKit
@@ -15,12 +17,16 @@ import UIKit
 class MarvelViewController: UIViewController {
 
     var contextView: MarvelView?
+    var viewModel: MarvelViewModelProtocol
     
-    let marvelModel = [
-        MarvelModel(image: UIImage(named: "img1")!),
-        MarvelModel(image: UIImage(named: "img2")!),
-        MarvelModel(image: UIImage(named: "img3")!)
-    ]
+    init(viewModel: MarvelViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +47,13 @@ class MarvelViewController: UIViewController {
 
 extension MarvelViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return marvelModel.count
+        return viewModel.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCellCollectionView", for: indexPath) as! CustomCellCollectionView
         cell.backgroundColor = .blue
-        cell.data = marvelModel[indexPath.row]
+        cell.data = viewModel.items[indexPath.row]
         return cell
     }
     
@@ -58,12 +64,12 @@ extension MarvelViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension MarvelViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return marvelModel.count
+        return viewModel.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellTableView", for: indexPath) as! CustomCellTableView
-        cell.data = marvelModel[indexPath.row]
+        cell.data = viewModel.items[indexPath.row]
         return cell
     }
 }

@@ -34,6 +34,7 @@ class MarvelView: UIView {
         let table = UITableView()
         table.register(CustomCellTableView.self, forCellReuseIdentifier: "CustomCellTableView")
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .darkGray
         table.tableFooterView = UIView()
        return table
     }()

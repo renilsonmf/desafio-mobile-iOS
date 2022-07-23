@@ -28,6 +28,8 @@ class CustomCellTableView: UITableViewCell {
     lazy var container: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
+        container.backgroundColor = .white
+        container.layer.cornerRadius = 15
         return container
     }()
     
@@ -49,10 +51,10 @@ extension CustomCellTableView: ViewCoding {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: topAnchor),
-            container.leadingAnchor.constraint(equalTo: leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: trailingAnchor),
-            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+            container.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            container.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
             carroucelImage.topAnchor.constraint(equalTo: container.topAnchor, constant: 10),
             carroucelImage.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 10),
@@ -64,5 +66,8 @@ extension CustomCellTableView: ViewCoding {
         ])
     }
     
+    func additionalSettings() {
+        self.backgroundColor = .darkGray
+    }
     
 }

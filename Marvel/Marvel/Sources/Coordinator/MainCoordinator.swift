@@ -17,7 +17,8 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let controller = MarvelViewController()
+        let viewModel = MarvelViewModel(items: [])
+        let controller = MarvelViewController(viewModel: viewModel)
         navigationController.pushViewController(controller, animated: true)
     }
 }
