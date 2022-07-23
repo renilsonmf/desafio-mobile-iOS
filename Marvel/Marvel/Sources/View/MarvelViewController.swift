@@ -5,13 +5,6 @@
 //  Created by Renilson Moreira on 20/07/22.
 //
 
-
-struct MarvelModel {
-    let name: String
-    let image: UIImage
-    let description: String
-}
-
 import UIKit
 
 class MarvelViewController: UIViewController {
@@ -45,6 +38,7 @@ class MarvelViewController: UIViewController {
 
 }
 
+//MARK: - Delegates CollectionView
 extension MarvelViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.items.count
@@ -62,6 +56,7 @@ extension MarvelViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
+//MARK: - Delegates TableView
 extension MarvelViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.items.count
